@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: uddipt-portfolio
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: DB_PATH
+        value: /var/data/portfolio.db
+    disk:
+      name: portfolio-data
+      mountPath: /var/data
+      sizeGB: 1
