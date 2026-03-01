@@ -1,7 +1,6 @@
-
-echo "portfolio.db
+venv/
+portfolio.db
 __pycache__/
 *.pyc
+*.db
 .env
-venv/
-*.db" > .gitignore

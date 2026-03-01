@@ -13,36 +13,46 @@ function switchPage(page) {
 
 /* =============================================
    CONTACT FORM
+   Uses Web3Forms — free static form service.
+   Get your free access key at: https://web3forms.com
+   Replace YOUR_ACCESS_KEY_HERE with your actual key.
    ============================================= */
+const WEB3FORMS_KEY = 'YOUR_ACCESS_KEY_HERE';
+
 async function submitContact(e) {
   e.preventDefault();
   const form = e.target;
   const btn = document.getElementById('submitBtn');
   const msgEl = document.getElementById('formMsg');
   const submitText = document.getElementById('submitText');
-  const data = {
+
+  const payload = {
+    access_key: WEB3FORMS_KEY,
     name: form.name.value.trim(),
     email: form.email.value.trim(),
-    subject: form.subject.value.trim(),
-    message: form.message.value.trim()
+    subject: form.subject.value.trim() || 'Portfolio Contact Form',
+    message: form.message.value.trim(),
+    from_name: 'Uddipt Portfolio'
   };
+
   btn.disabled = true;
   submitText.textContent = 'Sending...';
   msgEl.textContent = '';
   msgEl.className = 'form-msg';
+
   try {
-    const res = await fetch('/api/contact', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify(data)
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
     });
     const result = await res.json();
-    if (res.ok) {
-      msgEl.textContent = '✓ ' + result.message;
+    if (result.success) {
+      msgEl.textContent = '✓ Message received! I will get back to you soon.';
       msgEl.className = 'form-msg';
       form.reset();
     } else {
-      msgEl.textContent = '✗ ' + (result.error || 'Something went wrong.');
+      msgEl.textContent = '✗ ' + (result.message || 'Something went wrong.');
       msgEl.className = 'form-msg error';
     }
   } catch (err) {
