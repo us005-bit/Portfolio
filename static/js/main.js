@@ -73,11 +73,11 @@ const STACK_RULES = [
   { stack:'datascience',   keywords:['sentiment','nlp','ml','classifier','model','pytorch','hugging','bert','deep','neural','prediction','forecast','machine-learning','deep-learning'] },
   { stack:'dataanalytics', keywords:['powerbi','power-bi','inventory','sql','dashboard','analytics','analysis','visualization','data','mysql'] },
   { stack:'systemdesign',  keywords:['lld','system-design','systemdesign','systemdesignlld','design','oop','solid','pattern','low-level'] },
-  { stack:'genai',         keywords:['genai','gpt','llm','langchain','agent','rag','openai','gemini','langgraph'] }
+  { stack:'genai',         keywords:['genai','gpt','llm','langchain','agent','rag','openai','gemini','langgraph','nutriai'] }
 ];
 
 const FEATURED_REPO_FRAGMENTS = [
-  'ecommerce','sentiment','inventory','powerbi','power-bi','world-indicator','system-design','lld','systemdesignlld'
+  'nutriai','ecommerce','sentiment','inventory','powerbi','power-bi','world-indicator','system-design','lld','systemdesignlld'
 ];
 
 function classifyRepo(repo) {
@@ -165,12 +165,9 @@ function applyCurrentFilter() {
   const featuredSection = document.getElementById('featuredSection');
   const githubSection  = document.getElementById('githubSection');
 
-  // GenAI: show empty state, hide everything else
+  // GenAI: hide empty state, show sections normally
   if (filter === 'genai') {
-    genaiEmpty.classList.remove('hidden');
-    featuredSection.classList.add('hidden');
-    githubSection.classList.add('hidden');
-    return;
+    genaiEmpty.classList.add('hidden');
   }
 
   // All other filters: hide genai empty, show sections
