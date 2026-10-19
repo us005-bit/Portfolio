@@ -33,7 +33,7 @@ def index():
 
 @app.route('/api/contact', methods=['POST'])
 def submit_contact():
-    data = request.get_json()
+    data = request.get_json(silent=True)
     if not data or not data.get('name') or not data.get('email') or not data.get('message'):
         return jsonify({'error': 'Name, email, and message are required.'}), 400
     conn = sqlite3.connect(DB_PATH)
@@ -45,15 +45,6 @@ def submit_contact():
     conn.commit()
     conn.close()
     return jsonify({'success': True, 'message': 'Message received! I will get back to you soon.'})
-
-@app.route('/api/contacts', methods=['GET'])
-def get_contacts():
-    conn = sqlite3.connect(DB_PATH)
-    c = conn.cursor()
-    c.execute('SELECT id, name, email, subject, message, created_at FROM contacts ORDER BY created_at DESC')
-    rows = c.fetchall()
-    conn.close()
-    return jsonify([{'id':r[0],'name':r[1],'email':r[2],'subject':r[3],'message':r[4],'created_at':r[5]} for r in rows])
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))

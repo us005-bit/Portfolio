@@ -1,6 +1,6 @@
-venv/
-portfolio.db
+@"
+.venv/
 __pycache__/
-*.pyc
-*.db
+*.py[cod]
 .env
+"@ | Set-Content -Encoding utf8 .gitignore

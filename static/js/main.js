@@ -13,55 +13,24 @@ function switchPage(page) {
 
 /* =============================================
    CONTACT FORM
-   Uses Web3Forms — free static form service.
-   Get your free access key at: https://web3forms.com
-   Replace YOUR_ACCESS_KEY_HERE with your actual key.
+   Builds a prefilled email draft; the visitor explicitly sends it.
+   This works on both Flask and static hosting without fake success.
    ============================================= */
-const WEB3FORMS_KEY = 'YOUR_ACCESS_KEY_HERE';
-
-async function submitContact(e) {
+function submitContact(e) {
   e.preventDefault();
   const form = e.target;
-  const btn = document.getElementById('submitBtn');
   const msgEl = document.getElementById('formMsg');
-  const submitText = document.getElementById('submitText');
-
   const payload = {
-    access_key: WEB3FORMS_KEY,
     name: form.name.value.trim(),
     email: form.email.value.trim(),
-    subject: form.subject.value.trim() || 'Portfolio Contact Form',
-    message: form.message.value.trim(),
-    from_name: 'Uddipt Portfolio'
+    subject: form.subject.value.trim() || 'Portfolio contact',
+    message: form.message.value.trim()
   };
-
-  btn.disabled = true;
-  submitText.textContent = 'Sending...';
-  msgEl.textContent = '';
+  const subject = encodeURIComponent(payload.subject);
+  const body = encodeURIComponent(`Name: ${payload.name}\nEmail: ${payload.email}\n\n${payload.message}`);
+  msgEl.textContent = 'Your email app should open with the message prepared. Review it and press Send to contact me.';
   msgEl.className = 'form-msg';
-
-  try {
-    const res = await fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-    const result = await res.json();
-    if (result.success) {
-      msgEl.textContent = '✓ Message received! I will get back to you soon.';
-      msgEl.className = 'form-msg';
-      form.reset();
-    } else {
-      msgEl.textContent = '✗ ' + (result.message || 'Something went wrong.');
-      msgEl.className = 'form-msg error';
-    }
-  } catch (err) {
-    msgEl.textContent = '✗ Network error. Please try again.';
-    msgEl.className = 'form-msg error';
-  } finally {
-    btn.disabled = false;
-    submitText.textContent = 'Send Message';
-  }
+  window.location.href = `mailto:shankar.uddipt02@gmail.com?subject=${subject}&body=${body}`;
 }
 
 /* =============================================
@@ -109,8 +78,8 @@ function buildGithubCard(repo, stack) {
     <div class="project-card-top">
       <div class="project-stack-badge ${bc}">${bl}</div>
       <div class="project-links">
-        <a href="${repo.html_url}" target="_blank" class="proj-link" title="GitHub">${ghIcon}</a>
-        ${repo.homepage ? `<a href="${repo.homepage}" target="_blank" class="proj-link live" title="Live Demo">${liveIcon}</a>` : ''}
+        <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="proj-link" title="GitHub">${ghIcon}</a>
+        ${repo.homepage ? `<a href="${repo.homepage}" target="_blank" rel="noopener noreferrer" class="proj-link live" title="Live Demo">${liveIcon}</a>` : ''}
       </div>
     </div>
     <h3 class="project-title">${name}</h3>
@@ -140,6 +109,9 @@ async function loadGithubRepos() {
     grid.innerHTML = cards.length
       ? cards.map(({ repo, stack }) => buildGithubCard(repo, stack)).join('')
       : '<p style="color:var(--text-dim);font-size:14px;padding:20px 0">No additional repos found.</p>';
+    grid.querySelectorAll('.github-card').forEach((c,i)=>{ if(i>=3) c.classList.add('gh-extra'); });
+    const tg=document.getElementById('ghToggle');
+    if(tg && cards.length>3){ tg.hidden=false; tg.onclick=()=>{ const o=grid.classList.toggle('gh-open'); tg.textContent=o?'Show fewer repositories':'Show '+(cards.length-3)+' more repositories'; }; tg.textContent='Show '+(cards.length-3)+' more repositories'; }
     window.githubLoaded = true;
     applyCurrentFilter();
   } catch (err) {
