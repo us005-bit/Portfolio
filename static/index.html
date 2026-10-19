@@ -3,10 +3,24 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Uddipt Shankar — Portfolio</title>
+<title>Uddipt Shankar | AI Engineering & Cybersecurity</title>
+<meta name="description" content="Uddipt Shankar is a final-year Computer Science and System Engineering student at KIIT, building applied AI systems and exploring infrastructure security."/>
+<meta name="theme-color" content="#f7f7f4"/>
+<meta property="og:title" content="Uddipt Shankar | AI Engineering & Cybersecurity"/>
+<meta property="og:description" content="Applied AI, multi-agent systems, backend engineering and infrastructure security."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="css/style.css"/>
+<style>
+/* Requested portfolio corrections: retain hero, remove redundant info cards, restore About copy columns, simplify contact. */
+.about-copy-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,3vw,38px)}
+.about-copy-grid p{margin:0 0 16px;line-height:1.85}
+.about-copy-grid p:last-child{margin-bottom:0}
+.contact-simple{grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:28px}
+.contact-simple-actions{display:flex;flex-direction:column;align-items:flex-start;gap:14px;min-width:0}
+.contact-email{display:flex;align-items:center;gap:10px;color:var(--text-muted);font-size:14px;overflow-wrap:anywhere}
+@media(max-width:760px){.about-copy-grid{grid-template-columns:1fr}.contact-simple{grid-template-columns:1fr}.contact-simple-actions{align-items:flex-start}}
+</style>
 </head>
 <body data-page="about">
 
@@ -28,7 +42,7 @@
       <span class="tab-num">01</span> About
     </button>
     <button class="nav-tab" data-page="resume" onclick="switchPage('resume')">
-      <span class="tab-num">02</span> Resume
+      <span class="tab-num">02</span> Experience
     </button>
     <button class="nav-tab" data-page="projects" onclick="switchPage('projects')">
       <span class="tab-num">03</span> Projects
@@ -52,7 +66,9 @@
       </div>
       <div class="about-hero-right">
         <h1 class="hero-name"><span class="name-shimmer">Uddipt Shankar</span></h1>
-        <p class="hero-tagline">CSE Student · KIIT Bhubaneswar · Building with Data & AI</p>
+        <p class="hero-tagline">Final-year CS student at KIIT · Applied AI & Cybersecurity</p>
+        <p class="hero-summary">I build practical AI systems—from multi-agent workflows to production-minded APIs—and bring a growing security mindset to the way systems are designed, deployed and operated.</p>
+        <div class="hero-actions"><button class="hero-btn hero-btn-primary" onclick="switchPage('projects')">Explore projects <span aria-hidden="true">↗</span></button><a class="hero-btn hero-btn-outline" href="assets/resume.pdf" target="_blank" rel="noopener noreferrer">View résumé <span aria-hidden="true">↗</span></a></div>
         <div class="hero-social">
           <a href="https://github.com/us005-bit" target="_blank" class="social-pill">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
@@ -66,83 +82,103 @@
       </div>
     </section>
 
-    <section class="info-strip">
-      <div class="info-card glass-card">
-        <span class="info-icon">📍</span>
-        <div>
-          <div class="info-label">Location</div>
-          <div class="info-val">Noida, India</div>
-        </div>
-      </div>
-      <div class="info-card glass-card">
-        <span class="info-icon">📧</span>
-        <div>
-          <div class="info-label">Email</div>
-          <div class="info-val" id="emailDisplay"></div>
-        </div>
-      </div>
-      <div class="info-card glass-card">
-        <span class="info-icon">📱</span>
-        <div>
-          <div class="info-label">Phone</div>
-          <div class="info-val">+91 9230509080</div>
-        </div>
-      </div>
-      <div class="info-card glass-card">
-        <span class="info-icon">🎓</span>
-        <div>
-          <div class="info-label">University</div>
-          <div class="info-val">KIIT, Bhubaneswar</div>
-        </div>
-      </div>
-    </section>
+    <section class="about-body about-body-two-column">
+      <div class="about-text-grid about-single about-copy-columns">
+        <div class="about-text-block glass-card">
+          <h2 class="about-block-title">About Me</h2>
 
-    <section class="about-body">
-      <div class="section-label">About Me</div>
-      <div class="about-text-grid">
-        <div class="about-text-block glass-card">
-          <h3 class="about-block-title">Who I Am</h3>
-          <p>I'm a third-year CSE student at KIIT with a strong focus on machine learning, natural language processing, and data analytics. I enjoy building end-to-end solutions — from raw data preprocessing to deployed applications — and I'm always looking for opportunities to apply my skills to real-world problems.</p>
+          <div class="about-copy-grid">
+            <div>
+              <p>
+                I’m a final-year Computer Science and System Engineering
+                student at KIIT University, graduating in 2027, with a focus
+                on AI/ML engineering and an expanding foundation in
+                cybersecurity.
+              </p>
+
+              <p>
+                My work in AI spans machine learning, deep learning, NLP
+                and generative AI. I enjoy building end-to-end applications,
+                from model development and LLM-based workflows to backend
+                APIs, database integration and deployment.
+              </p>
+
+              <p>
+                  My flagship project, NutriAI, reflects this approach: a
+                multi-agent nutrition assistant built with LangGraph and
+                FastAPI, combining LLM reasoning, database retrieval and
+                persistent memory. You can explore the implementation and
+                other projects on the
+              <a href="#" onclick="switchPage('projects');return false">
+                Projects
+              </a>
+              page.
+            </p>
+          </div>
+
+          <div>
+           <p>
+              Alongside AI, I’ve developed a strong interest in network
+              and infrastructure security. During my Infrastructure
+              Security internship at HCLTech, I explored enterprise
+              networking and security through hands-on labs involving
+              Cisco ASA firewalls, access control, NAT/PAT, Site-to-Site
+              IPsec VPNs and threat analysis. I’ve also gained exposure
+              to Palo Alto firewall environments and core security
+              concepts.
+            </p>
+
+            <p>
+              What interests me most is the intersection of these two
+              fields: how AI can introduce new security challenges, how
+              it can strengthen threat detection, and how the
+              infrastructure behind intelligent systems can be secured.
+            </p>
+
+            <p>
+              I want to build systems that are not only useful and
+              scalable, but also designed with security in mind.
+            </p>
+          </div>
         </div>
-        <div class="about-text-block glass-card">
-          <h3 class="about-block-title">What I'm Building</h3>
-          <p>Currently deep into <strong>Agentic AI</strong> and <strong>Retrieval-Augmented Generation (RAG)</strong> systems using <strong>LangChain</strong> and <strong>LangGraph</strong>. Exploring how to build autonomous multi-step agents that reason, retrieve, and act — pushing beyond basic chatbots into real AI workflows.</p>
+      </div>
+    </div>
+  </section>
+
+    <section class="capabilities-section" aria-labelledby="capabilities-title">
+      <div class="capabilities-card">
+        <div class="capabilities-wash" aria-hidden="true"></div>
+        <div class="capabilities-content">
+          <div class="capabilities-eyebrow">What I build · What I secure</div>
+          <h2 id="capabilities-title">AI Capabilities <span class="capabilities-heading-accent">&amp; Security</span></h2>
+          <p class="capabilities-intro">My work spans intelligent applications, the engineering behind reliable deployment, and cybersecurity. Each column below groups the skills behind my projects and my infrastructure security training, and I treat security as a core discipline alongside AI—not an afterthought.</p>
+          <div class="capabilities-grid">
+            <article class="capability-item"><span class="capability-icon" aria-hidden="true">✳</span><div><div class="capability-group">AI &amp; INTELLIGENCE</div><h3>Multi-Agent Systems, LLMs &amp; RAG</h3><p>Orchestrating specialized agents with LangGraph in sequential, parallel and human-in-the-loop workflows, with LangChain tool calling, layered memory and ChromaDB retrieval. Dual-LLM ensembles (Qwen + Llama) cross-check answers to reduce hallucination.</p><div class="cap-proj"><span>Used in</span> <a href="#" onclick="switchPage('projects');return false">NutriAI</a></div></div></article>
+            <article class="capability-item"><span class="capability-icon" aria-hidden="true">⌁</span><div><div class="capability-group">ENGINEERING</div><h3>Database</h3><p>Designing normalized MySQL schemas with ACID-compliant stored procedures, PostgreSQL persistence for application state, and SQLite for lightweight services.</p><div class="cap-proj"><span>Used in</span> <a href="#" onclick="switchPage('projects');return false">Inventory Management System</a> · <a href="#" onclick="switchPage('projects');return false">NutriAI</a></div></div></article>
+            <article class="capability-item"><span class="capability-icon" aria-hidden="true">⌬</span><div><div class="capability-group">CYBERSECURITY</div><h3>Network Security</h3><p>Cisco ASA firewall architecture: security zones, all NAT/PAT types, and ACL and object-group design. Site-to-Site IPsec VPN with IKEv1/IKEv2, ESP vs AH, tunnel mode, Diffie-Hellman groups with PFS and AES-GCM/HMAC-SHA256.</p><div class="cap-proj"><span>Used in</span> <a href="#" onclick="switchPage('resume');return false">HCLTech internship labs</a></div></div></article>
+            <article class="capability-item"><span class="capability-icon" aria-hidden="true">▥</span><div><div class="capability-group">AI &amp; INTELLIGENCE</div><h3>ML &amp; Deep Learning</h3><p>Training and comparing PyTorch, Scikit-learn, XGBoost and LightGBM models against fine-tuned transformers, optimizing macro-F1 under class imbalance with class-weighted loss and dataset scaling.</p><div class="cap-proj"><span>Used in</span> <a href="#" onclick="switchPage('projects');return false">Review Sentiment Classification</a></div></div></article>
+            <article class="capability-item"><span class="capability-icon" aria-hidden="true">▤</span><div><div class="capability-group">ENGINEERING</div><h3>Containerization</h3><p>Docker multi-stage builds for lean, reproducible images, published to Docker Hub for one-command deployment of the full application stack.</p><div class="cap-proj"><span>Used in</span> <a href="#" onclick="switchPage('projects');return false">NutriAI</a></div></div></article>
+            <article class="capability-item"><span class="capability-icon" aria-hidden="true">⛨</span><div><div class="capability-group">CYBERSECURITY</div><h3>Infrastructure Security</h3><p>Lab-based work across firewalls, VPN tunnels and secure connectivity in simulated enterprise environments, with cross-vendor exposure growing through Palo Alto training.</p><div class="cap-proj"><span>Used in</span> <a href="#" onclick="switchPage('resume');return false">HCLTech internship labs</a></div></div></article>
+            <article class="capability-item"><span class="capability-icon" aria-hidden="true">▣</span><div><div class="capability-group">AI &amp; INTELLIGENCE</div><h3>NLP &amp; Computer Vision</h3><p>Text classification with DistilBERT, NLTK and TF-IDF, plus OpenCV image preprocessing and gesture detection tested under varied lighting.</p><div class="cap-proj"><span>Used in</span> <a href="#" onclick="switchPage('projects');return false">Review Sentiment Classification</a> · <a href="#" onclick="switchPage('resume');return false">Sysnet internship</a></div></div></article>
+            <article class="capability-item"><span class="capability-icon" aria-hidden="true">⌘</span><div><div class="capability-group">ENGINEERING</div><h3>Deployment &amp; APIs</h3><p>Building async FastAPI services with 25+ REST endpoints, real-time streaming and OCR-based ingestion, deployed on Render and Streamlit with live demos.</p><div class="cap-proj"><span>Used in</span> <a href="#" onclick="switchPage('projects');return false">NutriAI</a> · <a href="#" onclick="switchPage('projects');return false">Review Sentiment Classification</a></div></div></article>
+            <article class="capability-item"><span class="capability-icon" aria-hidden="true">◎</span><div><div class="capability-group">CYBERSECURITY</div><h3>AI Security</h3><p>Threat-detection fundamentals such as DGA-based malicious domain identification, Tor/dark-web architecture and the phishing attack lifecycle, applied to risks around LLM applications and the systems that support them.</p><div class="cap-proj"><span>Used in</span> <a href="#" onclick="switchPage('resume');return false">HCLTech internship labs</a></div></div></article>
+          </div>
+          <div class="capabilities-footer"><span>BUILD INTELLIGENTLY.</span><span>ENGINEER RELIABLY.</span><span>SECURE BY DESIGN.</span></div>
         </div>
       </div>
     </section>
 
     <section class="contact-section">
-      <div class="section-label">Get In Touch</div>
-      <div class="contact-wrap glass-card">
+      <div class="section-label">Connect</div>
+      <div class="contact-wrap glass-card contact-simple">
         <div class="contact-info-col">
-          <h2 class="contact-title">Let's <span class="accent-text">connect.</span></h2>
-          <p class="contact-sub">Open to internship opportunities, collaborations, and interesting conversations about machine learning and AI.</p>
+          <h2 class="contact-title">Let’s <span class="accent-text">connect.</span></h2>
+          <p class="contact-sub">For opportunities, collaborations, or conversations about applied AI and cybersecurity, connect with me on LinkedIn or reach me by email.</p>
         </div>
-        <form class="contact-form" id="contactForm" onsubmit="submitContact(event)">
-          <div class="form-row">
-            <div class="form-group">
-              <label>Name</label>
-              <input type="text" name="name" placeholder="Your name" required/>
-            </div>
-            <div class="form-group">
-              <label>Email</label>
-              <input type="email" name="email" placeholder="your@email.com" required/>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Subject</label>
-            <input type="text" name="subject" placeholder="What's this about?"/>
-          </div>
-          <div class="form-group">
-            <label>Message</label>
-            <textarea name="message" rows="4" placeholder="Tell me about the opportunity, project, or just say hi..." required></textarea>
-          </div>
-          <button type="submit" class="submit-btn" id="submitBtn">
-            <span id="submitText">Send Message</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </button>
-          <div class="form-msg" id="formMsg"></div>
-        </form>
+        <div class="contact-simple-actions">
+          <a class="social-pill" href="https://linkedin.com/in/uddipt-shankar" target="_blank" rel="noopener noreferrer">Connect on LinkedIn <span aria-hidden="true">↗</span></a>
+          <div class="contact-email" aria-label="Email address"><span aria-hidden="true">✉</span> shankar.uddipt02@gmail.com</div>
+        </div>
       </div>
     </section>
 
@@ -154,8 +190,8 @@
   <div class="page-inner">
 
     <div class="resume-header">
-      <div class="section-label">Resume</div>
-      <div class="resume-title-row"><h1 class="page-title" style="margin-bottom:0">Experience & <span class="accent-text-blue">Skills</span></h1><a href="assets/resume.pdf" download="Uddipt_Shankar_Resume.pdf" class="resume-dl-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> Download PDF</a></div>
+      <div class="section-label">Experience & Credentials</div>
+      <div class="resume-title-row"><h1 class="page-title" style="margin-bottom:0">Experience, <span class="accent-text-blue">Skills</span> & Credentials</h1></div>
     </div>
 
     <div class="resume-grid">
@@ -172,7 +208,7 @@
               <div class="tl-title">B.Tech — Computer Science & System Engineering</div>
               <div class="tl-org">Kalinga Institute of Industrial Technology (KIIT)</div>
               <div class="tl-meta">Bhubaneswar, India · Expected 2027</div>
-              <div class="tl-badge">CGPA: 8.2 (till 2nd year)</div>
+              <div class="tl-badge">CGPA: 8.34 · Through 6th semester (3rd year)</div>
             </div>
           </div>
         </div>
@@ -185,13 +221,26 @@
           <div class="timeline-item">
             <div class="tl-dot blue"></div>
             <div class="tl-content">
+              <div class="tl-title">Infrastructure Security Intern</div>
+              <div class="tl-org">HCLTech</div>
+              <div class="tl-meta">May – August 2026</div>
+              <ul class="tl-bullets">
+                <li>Built applied understanding of Cisco ASA firewall architecture — security zones, NAT/PAT types, and ACL/object-group design through hands-on Packet Tracer labs.</li>
+                <li>Studied Site-to-Site IPsec VPN design, including IKEv1/IKEv2 negotiation, ESP vs AH, tunnel mode, Diffie–Hellman groups with PFS, AES-GCM and HMAC-SHA256.</li>
+                <li>Covered threat-detection fundamentals: DGA-based malicious domain identification, Tor/dark-web architecture and the phishing-attack lifecycle.</li>
+                <li>Expanded training into Palo Alto firewalls for cross-vendor security infrastructure exposure.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="tl-dot blue"></div>
+            <div class="tl-content">
               <div class="tl-title">Intern — Computer Vision</div>
               <div class="tl-org">Sysnet Global Technologies Pvt. Ltd.</div>
               <div class="tl-meta">Oct 2025</div>
               <ul class="tl-bullets">
-                <li>Implemented hand gesture detection prototype using OpenCV.</li>
-                <li>Performed preprocessing and tested gesture detection across scenarios.</li>
-                <li>Gained hands-on understanding of Computer Vision project structure in industry.</li>
+                <li>Assisted in building a hand gesture recognition prototype using OpenCV; implemented image preprocessing and tested gesture detection under varied lighting and environmental conditions.</li>
+                <li>Gained hands-on exposure to computer vision project workflows, contributing to end-to-end pipeline development in an industry setting.</li>
               </ul>
             </div>
           </div>
@@ -265,82 +314,15 @@
       <div class="resume-col">
 
         <div class="resume-section glass-card">
-          <div class="resume-sec-header">
-            <span class="resume-sec-icon">⚡</span>
-            <h3>Technical Skills</h3>
-          </div>
-
-          <div class="skills-category">
-            <div class="skills-cat-label">Programming</div>
-            <div class="skills-tags">
-              <span class="skill-tag tag-prog">Python</span>
-              <span class="skill-tag tag-prog">Java</span>
-            </div>
-          </div>
-          <div class="skills-category">
-            <div class="skills-cat-label">Machine Learning / Deep Learning</div>
-            <div class="skills-tags">
-              <span class="skill-tag tag-ml">Scikit-learn</span>
-              <span class="skill-tag tag-ml">XGBoost</span>
-              <span class="skill-tag tag-ml">LightGBM</span>
-              <span class="skill-tag tag-ml">PyTorch</span>
-              <span class="skill-tag tag-ml">Hugging Face Transformers</span>
-            </div>
-          </div>
-          <div class="skills-category">
-            <div class="skills-cat-label">Natural Language Processing</div>
-            <div class="skills-tags">
-              <span class="skill-tag tag-nlp">NLTK</span>
-              <span class="skill-tag tag-nlp">TF-IDF</span>
-              <span class="skill-tag tag-nlp">Tokenization</span>
-              <span class="skill-tag tag-nlp">Lemmatization</span>
-              <span class="skill-tag tag-nlp">DistilBERT Fine-tuning</span>
-            </div>
-          </div>
-          <div class="skills-category">
-            <div class="skills-cat-label">Data & Visualization</div>
-            <div class="skills-tags">
-              <span class="skill-tag tag-data">Pandas</span>
-              <span class="skill-tag tag-data">NumPy</span>
-              <span class="skill-tag tag-data">Matplotlib</span>
-              <span class="skill-tag tag-data">Seaborn</span>
-              <span class="skill-tag tag-data">Power BI</span>
-              <span class="skill-tag tag-data">Excel</span>
-            </div>
-          </div>
-          <div class="skills-category">
-            <div class="skills-cat-label">Deployment</div>
-            <div class="skills-tags">
-              <span class="skill-tag tag-deploy">Streamlit</span>
-              <span class="skill-tag tag-deploy">FastAPI</span>
-            </div>
-          </div>
-          <div class="skills-category">
-            <div class="skills-cat-label">Databases</div>
-            <div class="skills-tags">
-              <span class="skill-tag tag-db">MySQL</span>
-              <span class="skill-tag tag-db">SQLite</span>
-            </div>
-          </div>
-          <div class="skills-category">
-            <div class="skills-cat-label">Tools</div>
-            <div class="skills-tags">
-              <span class="skill-tag tag-tools">Git</span>
-              <span class="skill-tag tag-tools">GitHub</span>
-              <span class="skill-tag tag-tools">Jupyter Notebook</span>
-              <span class="skill-tag tag-tools">VS Code</span>
-              <span class="skill-tag tag-tools">Anaconda</span>
-            </div>
-          </div>
-          <div class="skills-category">
-            <div class="skills-cat-label">Familiar With</div>
-            <div class="skills-tags">
-              <span class="skill-tag tag-fam">LangChain</span>
-              <span class="skill-tag tag-fam">LangGraph</span>
-              <span class="skill-tag tag-fam">Computer Vision</span>
-              <span class="skill-tag tag-fam">HTML / CSS / JS</span>
-            </div>
-          </div>
+          <div class="resume-sec-header"><span class="resume-sec-icon">⚡</span><h3>Technical Skills</h3></div>
+          <div class="skills-category"><div class="skills-cat-label">Languages</div><div class="skills-tags"><span class="skill-tag tag-prog">Python</span><span class="skill-tag tag-prog">Java</span></div></div>
+          <div class="skills-category"><div class="skills-cat-label">Machine Learning</div><div class="skills-tags"><span class="skill-tag tag-ml">PyTorch</span><span class="skill-tag tag-ml">Scikit-learn</span><span class="skill-tag tag-ml">XGBoost</span><span class="skill-tag tag-ml">LightGBM</span></div></div>
+          <div class="skills-category"><div class="skills-cat-label">NLP & Transformers</div><div class="skills-tags"><span class="skill-tag tag-nlp">Hugging Face Transformers</span><span class="skill-tag tag-nlp">DistilBERT Fine-tuning</span><span class="skill-tag tag-nlp">NLTK</span><span class="skill-tag tag-nlp">TF-IDF</span></div></div>
+          <div class="skills-category"><div class="skills-cat-label">LLMs & Agents</div><div class="skills-tags"><span class="skill-tag tag-deploy">LangChain</span><span class="skill-tag tag-deploy">LangGraph</span><span class="skill-tag tag-deploy">RAG</span><span class="skill-tag tag-deploy">Tool Calling</span><span class="skill-tag tag-deploy">Multi-Agent Systems</span></div></div>
+          <div class="skills-category"><div class="skills-cat-label">Backend & APIs</div><div class="skills-tags"><span class="skill-tag tag-deploy">FastAPI</span><span class="skill-tag tag-deploy">REST APIs</span><span class="skill-tag tag-deploy">Async Programming</span></div></div>
+          <div class="skills-category"><div class="skills-cat-label">Data, Databases & Analysis</div><div class="skills-tags"><span class="skill-tag tag-data">PostgreSQL</span><span class="skill-tag tag-db">MySQL</span><span class="skill-tag tag-db">SQLite</span><span class="skill-tag tag-data">Pandas</span><span class="skill-tag tag-data">NumPy</span><span class="skill-tag tag-data">Matplotlib</span><span class="skill-tag tag-data">Seaborn</span><span class="skill-tag tag-data">Power BI</span></div></div>
+          <div class="skills-category"><div class="skills-cat-label">Tools & Deployment</div><div class="skills-tags"><span class="skill-tag tag-deploy">Docker</span><span class="skill-tag tag-deploy">Render</span><span class="skill-tag tag-deploy">Streamlit</span><span class="skill-tag tag-tools">Git</span><span class="skill-tag tag-tools">GitHub</span><span class="skill-tag tag-tools">Jupyter Notebook</span><span class="skill-tag tag-tools">VS Code</span></div></div>
+          <div class="skills-category"><div class="skills-cat-label">Networking & Security</div><div class="skills-tags"><span class="skill-tag tag-fam">Cisco ASA</span><span class="skill-tag tag-fam">Site-to-Site IPsec VPN</span><span class="skill-tag tag-fam">Palo Alto</span><span class="skill-tag tag-fam">Packet Tracer</span><span class="skill-tag tag-fam">Network Threat Analysis</span></div></div>
         </div>
 
         <div class="resume-section glass-card">
@@ -368,24 +350,16 @@
 
     <div class="projects-header">
       <div class="section-label">Projects</div>
-      <h1 class="page-title">What I've <span class="accent-text-purple">Built</span></h1>
+      <h1 class="page-title">Selected <span class="accent-text-purple">work</span></h1>
+      <p class="projects-intro">A few projects that show how I approach applied machine learning, agentic workflows, data and backend systems.</p>
     </div>
 
     <div class="stack-filters">
       <button class="filter-pill active" data-filter="all" onclick="filterProjects('all', this)">All</button>
-      <button class="filter-pill" data-filter="datascience" onclick="filterProjects('datascience', this)">Data Science</button>
+      <button class="filter-pill" data-filter="datascience" onclick="filterProjects('datascience', this)">ML / NLP</button>
       <button class="filter-pill" data-filter="genai" onclick="filterProjects('genai', this)">GenAI</button>
       <button class="filter-pill" data-filter="dataanalytics" onclick="filterProjects('dataanalytics', this)">Data Analytics</button>
-      <button class="filter-pill" data-filter="systemdesign" onclick="filterProjects('systemdesign', this)">System Design</button>
-    </div>
-
-    <div class="genai-empty hidden" id="genaiEmpty">
-      <div class="empty-state glass-card">
-        <div class="empty-icon">🤖</div>
-        <h3>GenAI Projects — Coming Soon</h3>
-        <p>Currently building Agentic AI and RAG systems using LangChain and LangGraph. Check back soon or follow my GitHub for updates.</p>
-        <a href="https://github.com/us005-bit" target="_blank" class="hero-btn hero-btn-outline" style="margin-top:20px;display:inline-flex">Follow on GitHub →</a>
-      </div>
+      <button class="filter-pill" data-filter="systemdesign" onclick="filterProjects('systemdesign', this)">Backend / Design</button>
     </div>
 
     <div id="featuredSection">
@@ -400,15 +374,18 @@
               <a href="https://github.com/us005-bit/NutriAi" target="_blank" class="proj-link" title="GitHub">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
               </a>
-              <a href="http://nutri-ai-0jvj.onrender.com/docs" target="_blank" class="proj-link live" title="Live API">
+              <a href="https://nutri-ai-0jvj.onrender.com/docs" target="_blank" class="proj-link live" title="Live API">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
               </a>
             </div>
           </div>
-          <h3 class="project-title">NutriAI — Agentic Nutrition Assistant</h3>
-          <p class="project-desc">Production-grade multi-agent AI system for Indian college students. 3 LangGraph agents, 5-layer nutrition pipeline with dual-LLM ensemble, RAG chatbot with 3-layer memory, EfficientNet-B2 food classifier, and 25 REST endpoints.</p>
+          <div class="project-kicker">MAJOR PROJECT · AI ENGINEERING</div>
+          <h3 class="project-title">NutriAI — Multi-Agent LLM Nutrition Assistant</h3>
+          <p class="project-desc">A multi-agent nutrition assistant that answers food and meal questions while keeping latency low and flagging uncertain estimates.</p>
+          <ul class="project-points"><li>Three specialized LangGraph agents with sequential, parallel and human-in-the-loop workflows</li><li>Five-layer pipeline (cache → DB → fuzzy match → dual-LLM → fallback) cutting repeat-query latency by ~99%</li><li>Dual-LLM ensemble (Qwen + Llama) with divergence detection to reduce hallucination risk</li><li>FastAPI backend with 25+ REST endpoints, OCR menu ingestion and ChromaDB RAG over 500+ dishes</li><li>Docker multi-stage builds, deployed on Docker Hub and Render</li></ul>
+          <div class="project-metrics"><span><strong>~99%</strong> lower repeat-query latency</span><span><strong>0.2 ms</strong> measured cache response</span><span><strong>25+</strong> REST endpoints</span></div>
           <div class="project-tags">
-            <span class="ptag">LangGraph</span><span class="ptag">FastAPI</span><span class="ptag">PostgreSQL</span><span class="ptag">RAG</span><span class="ptag">ChromaDB</span>
+            <span class="ptag">LangGraph</span><span class="ptag">FastAPI</span><span class="ptag">PostgreSQL</span><span class="ptag">RAG</span><span class="ptag">Docker</span>
           </div>
         </div>
 
@@ -426,7 +403,8 @@
             </div>
           </div>
           <h3 class="project-title">Ecommerce Review Sentiment Classification</h3>
-          <p class="project-desc">End-to-end sentiment pipeline on 100K+ Amazon reviews. Benchmarked TF-IDF with classical ML before fine-tuning DistilBERT — achieving ~90% accuracy across 5 product categories.</p>
+          <p class="project-desc">End-to-end sentiment classification on ~100K Amazon reviews, comparing classical ML baselines with a fine-tuned DistilBERT.</p>
+          <ul class="project-points"><li>Benchmarked Logistic Regression, SVM, Naive Bayes, XGBoost and LightGBM against DistilBERT</li><li>Optimized macro-F1 under class imbalance using class-weighted loss and dataset scaling</li><li>~90% accuracy and ~0.69 macro-F1</li><li>Streamlit app with batch inference, confidence scores and live visualizations</li></ul>
           <div class="project-tags">
             <span class="ptag">Machine Learning</span><span class="ptag">NLP</span><span class="ptag">Transformers</span><span class="ptag">DistilBERT</span><span class="ptag">Streamlit</span>
           </div>
@@ -441,8 +419,9 @@
               </a>
             </div>
           </div>
-          <h3 class="project-title">PowerBI World Indicator Analysis</h3>
-          <p class="project-desc">End-to-end analytics using Python for multi-year (2016–2024) data extraction. Interactive Power BI dashboard on GDP, health, internet penetration, and poverty with advanced DAX measures.</p>
+          <h3 class="project-title">Power BI World Indicator Analysis</h3>
+          <p class="project-desc">Interactive Power BI report on global indicators (GDP, health, internet penetration, poverty) for 2016–2024.</p>
+          <ul class="project-points"><li>Python-based data extraction and preparation</li><li>DAX measures and coordinated visuals for filtering and country-level comparison</li></ul>
           <div class="project-tags">
             <span class="ptag">Power BI</span><span class="ptag">Python</span><span class="ptag">DAX</span><span class="ptag">Data Visualization</span>
           </div>
@@ -458,7 +437,8 @@
             </div>
           </div>
           <h3 class="project-title">Inventory Management System</h3>
-          <p class="project-desc">Full-stack inventory system with normalized 5-table MySQL schema, ACID-compliant stored procedures, and a Python–Streamlit interface managing 200+ products without writing SQL.</p>
+          <p class="project-desc">Database-backed inventory application with a Streamlit interface for non-technical users.</p>
+          <ul class="project-points"><li>Normalized MySQL schema with 5+ interconnected tables</li><li>ACID-compliant stored procedures and transaction-aware operations</li><li>CRUD, real-time stock tracking and analytical queries without writing SQL</li></ul>
           <div class="project-tags">
             <span class="ptag">MySQL</span><span class="ptag">Python</span><span class="ptag">Streamlit</span><span class="ptag">SQL</span>
           </div>
@@ -473,8 +453,9 @@
               </a>
             </div>
           </div>
-          <h3 class="project-title">System Design — Low Level Design</h3>
-          <p class="project-desc">Low Level Design case studies for Google Docs, Zomato, Spotify, and Payment Gateway applying SOLID principles and 20+ design patterns including Factory, Observer, Adapter, and Decorator.</p>
+          <h3 class="project-title">System Design — Low-Level Design Case Studies</h3>
+          <p class="project-desc">Object-oriented design case studies inspired by Google Docs, Zomato, Spotify and payment gateways.</p>
+          <ul class="project-points"><li>Each case breaks a problem into responsibilities, domain objects and interactions</li><li>Applies SOLID principles and 20+ design patterns (Factory, Observer, Adapter, Decorator)</li></ul>
           <div class="project-tags">
             <span class="ptag">Java</span><span class="ptag">Object-Oriented Programming</span><span class="ptag">SOLID</span><span class="ptag">Design Patterns</span>
           </div>
@@ -484,18 +465,20 @@
     </div>
 
     <div id="githubSection">
-      <div class="github-label">From GitHub</div>
+      <div class="github-label">More on GitHub</div>
       <div class="github-grid" id="githubGrid">
         <div class="github-loading" id="githubLoading">
           <div class="loading-dots"><span></span><span></span><span></span></div>
           <p>Loading repos from GitHub...</p>
         </div>
       </div>
+      <button class="gh-toggle" id="ghToggle" type="button" hidden>Show more repositories</button>
     </div>
 
   </div>
 </main>
 
+<footer class="site-footer"><span>© 2026 Uddipt Shankar</span><span>Built with curiosity · Designed for clarity</span><a href="https://github.com/us005-bit" target="_blank" rel="noreferrer">GitHub ↗</a></footer>
 <script src="js/main.js"></script>
 </body>
 </html>
